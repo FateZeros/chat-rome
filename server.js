@@ -12,21 +12,29 @@ app.set('port', process.env.PORT || 5002);
 app.use(express.static(path.join(__dirname, 'views')))
 app.use(express.static(path.join(__dirname, 'public')));
 
-//在线人数统计
-var onlineNums = 0
 
 var clients = [];
-
+var userNums = 0
 
 
 app.get('/', function(req, res) {
 	// res.send('hello world')
-	res.sendFile(__dirname + '/index.html')
+	res.sendFile(__dirname + '/views/index.html')
+})
+
+app.get('/logoIn',function(req, res) {
+  res.sendFile(__dirname +'/views/logoIn.html')
+})
+
+app.get('/register', function(req, res) {
+	res.sendFile(__dirname +'/views/register.html')
 })
 
 io.on('connection', function(socket) {
-	onlineNums++
-	socket.emit('onlineCount', { onlineNums: onlineNums })
+	socket.on('newUser', function(data) {
+		console.log(userNums++)
+		socket.emit('userNums', userNums++)
+	})
 
 	console.log('a user connected')
 	socket.on('online', function(data) {
@@ -39,9 +47,7 @@ io.on('connection', function(socket) {
 	})
 	//disconnect
 	socket.on('disconnect', function() {
-		onlineNums--
-		console.log(onlineNums)
-		socket.emit('onlineCount', { onlineNums: onlineNums })
+		socket.emit('userNums', userNums--)
 		console.log('user disconnected')
 	})
 })

@@ -3,10 +3,11 @@ $(function() {
 
 	var socket = io()
 	
-	//获取在线人数
-	socket.on('onlineCount', function(data) {
+	//新用户进入
+	socket.emit('newUser')
+	socket.on('userNums', function(data) {
 		console.log(data)
-		$('#userCount').text(data.onlineNums)
+		$('#userCount').text(data)
 	})
 
 	$('form').submit(function() {
@@ -17,4 +18,6 @@ $(function() {
 	socket.on('chatMsg', function(msg) {
 		$('#allMsgs').append($('<li>').text(msg))
 	})
+
+
 })
