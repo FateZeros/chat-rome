@@ -3,70 +3,31 @@
 <head>
 	<meta charset="UTF-8">
 	<title>chat rome</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-
-		form {
-			background: #000;
-			padding: 3px;
-			position: fixed;
-			bottom: 0;
-			width: 100%;
-		}
-
-		form input {
-			border: 0;
-			padding: 10px;
-			width: 90%;
-			margin-right: .5%;
-		}
-
-		form button {
-			width: 9%;
-			background: rgb(130, 244, 255);
-			border: none;
-			padding: 10px;
-		}
-
-		#messages {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		#messages li {
-			padding: 5px 10px;
-		}
-
-		#messages li:nth-child(odd) {
-			background: #eee;
-		}
-	</style>
+	<link rel="stylesheet" href="css/chat.css">
 </head>
 <body>
-	<ul id="messages"></ul>
+	<div class="header">在线人数：<span id="userCount">0</span></div>
+	
+	<div class="wrap">
+		<div class="messages">
+			<ul id="allMsgs">
+				
+			</ul>
+		</div>
+		<div class="users">
+			<ul id="allUsers">
+				<li>章三</li>
+			</ul>
+		</div>
+	</div>
+	
 	<form action="">
 		<input id="m" autocomplete="off" /><button>Send</button>
 	</form>
 
 	<script src="/socket.io/socket.io.js"></script>
-	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-	<script type="text/javascript">
-		$(function() {
-			var socket = io()
-			$('form').submit(function() {
-				socket.emit('chat message', $('#m').val())
-				$('#m').val('')
-				return false
-			})
-			socket.on('chat message', function(msg) {
-				$('#messages').append($('<li>').text(msg))
-			})
-		})
-	</script>
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/chat.js"></script>
 </body>
 </html>
