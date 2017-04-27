@@ -13,6 +13,9 @@ http.createServer() !!
 
 npm install socket.io --save
 
+# cookie-parser
+npm install cookie-parser --save
+
 ```
 1.emit: 用来发射一个事件或者说触发一个事件，第一个参数为事件名，第二个参数为要发送的数据，
 第三个参数为回调函数（一般省略，如需对方接受到信息后立即得到确认时，则需要用到回调函数）。
