@@ -1,4 +1,4 @@
-# chat-rome
+# chat-room
 a simple chatRoom with Node.js
 
 # express

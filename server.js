@@ -22,7 +22,7 @@ var userNums = 0
 app.get('/', function(req, res) {
 	console.log('Cookie: ', req.cookies)
 	console.log('Signed Cookies: ', req.signedCookies)
-	if(!req.headers.cookie)
+	if(!req.signedCookies)
   {
     res.redirect('/logoIn')
     return
